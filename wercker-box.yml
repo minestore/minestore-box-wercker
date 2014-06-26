@@ -1,0 +1,41 @@
+name: minestore
+version: 0.0.1
+inherits: wercker/ubuntu12.04-webessentials@1.0.0
+type: main
+platform: ubuntu@12.04
+description: Box for Wercker to build packages of minestore.
+packages:
+  - imagemagick@latest
+keywords:
+  - ruby2.1.2
+  - imagemagick
+script: |
+  export RUBY_VERSION=2.1.2
+
+  sudo apt-get update
+
+  # imagemagick
+  sudo apt-get install -y imagemagick
+
+  # ruby
+  sudo apt-get remove ruby1.9.1
+  cd $HOME
+  mkdir rubyinstall
+  cd rubyinstall
+  wget ftp://ftp.ruby-lang.org/pub/ruby/2.1/ruby-$RUBY_VERSION.tar.gz
+  tar xzvf ruby-$RUBY_VERSION.tar.gz
+  cd ruby-$RUBY_VERSION
+  ./configure --with-readline-dir=/usr/include/readline --with-openssl-dir=/usr/include/openssl
+  make
+  make test
+  sudo make install
+  cd $HOME
+  rm -fr rubyinstall
+  echo "gem: --no-rdoc --no-ri" >> $HOME/.gemrc
+  echo "RAILS_ENV=test" | sudo tee -a /etc/environment
+  echo "RACK_ENV=test" | sudo tee -a /etc/environment
+
+  sudo gem install bundler
+
+env:
+  RUBY_VERSION: "2.1.2"
