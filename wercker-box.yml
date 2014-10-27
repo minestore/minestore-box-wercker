@@ -1,5 +1,5 @@
 name: minestore
-version: 0.1.2
+version: 0.1.4
 inherits: wercker/ubuntu12.04-webessentials@1.0.0
 type: main
 platform: ubuntu@12.04
@@ -7,10 +7,12 @@ description: Box for Wercker to build packages of minestore.
 packages:
   - imagemagick@latest
 keywords:
-  - ruby2.1.3
+  - ruby2.1.4
+  - 2.1.4
+  - ruby
   - imagemagick
 script: |
-  export RUBY_VERSION=2.1.3
+  export RUBY_VERSION=2.1.4
 
   sudo apt-get update
 
@@ -38,4 +40,4 @@ script: |
   sudo gem install bundler
 
 env:
-  RUBY_VERSION: "2.1.3"
+  RUBY_VERSION: "2.1.4"
