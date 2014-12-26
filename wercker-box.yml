@@ -23,7 +23,7 @@ script: |
   sudo apt-get remove ruby1.9.1
   cd $HOME
   mkdir rubyinstall
-  cd rubyinstall2
+  cd rubyinstall
   wget ftp://ftp.ruby-lang.org/pub/ruby/2.2/ruby-$RUBY_VERSION.tar.gz
   tar xzvf ruby-$RUBY_VERSION.tar.gz
   cd ruby-$RUBY_VERSION
